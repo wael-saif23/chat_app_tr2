@@ -1,12 +1,11 @@
 import 'package:chat_app_2/constant.dart';
-import 'package:chat_app_2/views/register_page.dart';
 import 'package:chat_app_2/widgets/custom_botum.dart';
 import 'package:chat_app_2/widgets/custom_text_file.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
-  static String id = "Login Page";
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
+  static String id = "Register Page";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +38,7 @@ class LoginPage extends StatelessWidget {
               height: 48,
             ),
             const Text(
-              "Login",
+              "REGISTER",
               style: TextStyle(fontSize: 24, color: Colors.white),
             ),
             const SizedBox(
@@ -62,7 +61,7 @@ class LoginPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "don't have an acount?",
+                  "I have an acount!",
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.white.withOpacity(.7),
@@ -70,10 +69,10 @@ class LoginPage extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, RegisterPage.id);
+                    Navigator.pop(context);
                   },
                   child: Text(
-                    "REGISTER",
+                    "SIGN IN",
                     style: TextStyle(
                         fontSize: 16,
                         color: Colors.green.withOpacity(.7),
