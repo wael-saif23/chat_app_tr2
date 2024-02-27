@@ -6,13 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+  RegisterPage({super.key});
   static String id = "Register Page";
-
+  String? email;
+  String? password;
   @override
   Widget build(BuildContext context) {
-    String email;
-    String password;
     return Scaffold(
       backgroundColor: KMainColor,
       body: Padding(
@@ -72,8 +71,13 @@ class RegisterPage extends StatelessWidget {
                   try {
                     final credential = await FirebaseAuth.instance
                         .createUserWithEmailAndPassword(
-                      email: email,
-                      password: password,
+                      email: email!,
+                      password: password!,
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("sucsses"),
+                      ),
                     );
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {
