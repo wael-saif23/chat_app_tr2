@@ -1,13 +1,18 @@
 import 'package:chat_app_2/constant.dart';
 import 'package:chat_app_2/widgets/custom_botum.dart';
 import 'package:chat_app_2/widgets/custom_text_file.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
   static String id = "Register Page";
+
   @override
   Widget build(BuildContext context) {
+    String email;
+    String password;
     return Scaffold(
       backgroundColor: KMainColor,
       body: Padding(
@@ -44,19 +49,43 @@ class RegisterPage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const CustomTextFile(
+            CustomTextFile(
+              onchanged: (value) {
+                email = value;
+              },
               hintText: "Email",
             ),
             const SizedBox(
               height: 10,
             ),
-            const CustomTextFile(
+            CustomTextFile(
+              onchanged: (value) {
+                password = value;
+              },
               hintText: "Password",
             ),
             const SizedBox(
               height: 20,
             ),
-            const CustomBotum(),
+            CustomBotum(
+                ontap: () async {
+                  try {
+                    final credential = await FirebaseAuth.instance
+                        .createUserWithEmailAndPassword(
+                      email: email,
+                      password: password,
+                    );
+                  } on FirebaseAuthException catch (e) {
+                    if (e.code == 'weak-password') {
+                      print('The password provided is too weak.');
+                    } else if (e.code == 'email-already-in-use') {
+                      print('The account already exists for that email.');
+                    }
+                  } catch (e) {
+                    print(e);
+                  }
+                },
+                text: 'Register'),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

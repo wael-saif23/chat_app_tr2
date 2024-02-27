@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CustomTextFile extends StatelessWidget {
-  const CustomTextFile({super.key, required this.hintText});
+  const CustomTextFile({super.key, required this.hintText, this.onchanged});
   final String hintText;
+  final Function(String)? onchanged;
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onChanged: onchanged,
       cursorColor: Colors.white,
       decoration: InputDecoration(
         hintText: "Please insert your $hintText",

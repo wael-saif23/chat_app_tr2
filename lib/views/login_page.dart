@@ -57,7 +57,11 @@ class LoginPage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const CustomBotum(),
+             CustomBotum(
+              ontap: () {
+                
+              },
+              text: 'Sing In'),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
