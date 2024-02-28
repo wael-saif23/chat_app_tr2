@@ -45,23 +45,19 @@ class LoginPage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const CustomTextFile(
+            const CustomTextFromFile(
               hintText: "Email",
             ),
             const SizedBox(
               height: 10,
             ),
-            const CustomTextFile(
+            const CustomTextFromFile(
               hintText: "Password",
             ),
             const SizedBox(
               height: 20,
             ),
-             CustomBotum(
-              ontap: () {
-                
-              },
-              text: 'Sing In'),
+            CustomBotum(ontap: () {}, text: 'Sing In'),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

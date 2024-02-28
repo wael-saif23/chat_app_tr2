@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 
-class CustomTextFile extends StatelessWidget {
-  const CustomTextFile({super.key, required this.hintText, this.onchanged});
+class CustomTextFromFile extends StatelessWidget {
+  const CustomTextFromFile(
+      {super.key, required this.hintText, this.onchanged});
   final String hintText;
   final Function(String)? onchanged;
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return "Field is requird";
+        }
+        return null;
+      },
       onChanged: onchanged,
       cursorColor: Colors.white,
       decoration: InputDecoration(
