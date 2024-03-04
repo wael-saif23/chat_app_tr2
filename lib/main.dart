@@ -1,3 +1,4 @@
+import 'package:chat_app_2/views/chat_page.dart';
 import 'package:chat_app_2/views/login_page.dart';
 import 'package:chat_app_2/views/register_page.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,9 @@ class ChatApp2 extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
-          LoginPage.id: (context) => const LoginPage(),
-          RegisterPage.id:(context) =>  RegisterPage()
+          LoginPage.id: (context) =>  LoginPage(),
+          RegisterPage.id:(context) =>  RegisterPage(),
+          ChatPage.id: (context)=> const ChatPage(),
         },
         initialRoute: LoginPage.id,
         );
