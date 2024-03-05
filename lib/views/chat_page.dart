@@ -1,13 +1,17 @@
 import 'package:chat_app_2/constant.dart';
 import 'package:chat_app_2/widgets/chat_bubles.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({super.key});
   static String id = 'chat page';
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    var email = ModalRoute.of(context)!.settings.arguments;
+    CollectionReference massages =
+        FirebaseFirestore.instance.collection(KMessages);
+    return Scaffold(
       appBar: AppBar(
         backgroundColor: KMainColor,
         automaticallyImplyLeading: false,
@@ -15,14 +19,18 @@ class ChatPage extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(KAppImage,width: 50,),
-           const Text(
-            'Chat page',
-            style: TextStyle(color: Colors.white),
-          )],
+            Image.asset(
+              KAppImage,
+              width: 50,
+            ),
+            const Text(
+              'Chat page',
+              style: TextStyle(color: Colors.white),
+            )
+          ],
         ),
       ),
-      body:Padding(
+      body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
@@ -34,21 +42,31 @@ class ChatPage extends StatelessWidget {
                 },
               ),
             ),
-           const TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8),),
-                borderSide: BorderSide(color: KMainColor,width: 2)
+            TextField(
+              onSubmitted: (value) {
+                massages.add({
+                  KTheMessages: value, // John Doe
+                  KMassageTime: DateTime.now(), // Stokes and Sons
+                  KUserId: email // 42
+                });
+              },
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8),
+                    ),
+                    borderSide: BorderSide(color: KMainColor, width: 2)),
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(16),
+                        bottomRight: Radius.circular(16)),
+                    borderSide: BorderSide(color: KMainColor, width: 2)),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(16),
+                        bottomRight: Radius.circular(16)),
+                    borderSide: BorderSide(color: KMainColor, width: 2)),
               ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(16),bottomRight: Radius.circular(16)),
-                borderSide: BorderSide(color: KMainColor,width: 2)
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(16),bottomRight: Radius.circular(16)),
-                borderSide: BorderSide(color: KMainColor,width: 2)
-              ),
-            ),
             )
           ],
         ),
@@ -56,4 +74,3 @@ class ChatPage extends StatelessWidget {
     );
   }
 }
-
