@@ -4,8 +4,8 @@ class Messages {
   final String message;
   final String id;
 
-  Messages({required this.message, required this.id});
+  Messages( this.message,  this.id);
   factory Messages.fromjson(jsondata) {
-    return Messages(message: jsondata[KTheMessages], id: jsondata[KUserId]);
+    return Messages( jsondata[KTheMessages],  jsondata[KUserId]);
   }
 }
